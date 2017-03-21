@@ -1,19 +1,35 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { Vimeo } from 'vimeo';
+
 
 class App extends Component {
+  constructor() {
+    super();
+
+    let vimeo = new Vimeo(
+      process.env.REACT_APP_VIMEO_CLIENT_ID,
+      process.env.REACT_APP_VIMEO_CLIENT_SECRET,
+      process.env.REACT_APP_VIMEO_ACCESS_TOKEN
+    );
+
+    vimeo.request({
+      path: '/channels/staffpicks/videos',
+      query: {
+        page: 1
+      }
+    }, (error, body, statusCode, headers) => {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log(body);
+      }
+    });
+  }
+
   render() {
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+      <h2>Welcome to React</h2>
     );
   }
 }
