@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+import { Vimeo } from 'vimeo';
+import SearchBar from './SearchBar';
 import 'antd/dist/antd.css'
 import './App.css';
-import { Vimeo } from 'vimeo';
 
 
 class App extends Component {
@@ -30,7 +31,7 @@ class App extends Component {
 
   render() {
     return (
-      <h2>Welcome to React</h2>
+      <SearchBar />
     );
   }
 }
