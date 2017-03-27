@@ -19,7 +19,7 @@ class SearchBar extends Component {
 
   onInputChange(term) {
     this.setState({term});
-    console.log(`On Input Change: ${term}`);
+    this.props.onSearchTermChange(term);
   }
 }
 
