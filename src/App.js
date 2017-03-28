@@ -1,19 +1,11 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
-import { Vimeo } from 'vimeo';
 import SearchBar from './SearchBar';
 import VideoList from './VideoList';
 import 'antd/dist/antd.css'
 import './App.css';
 
-const vimeo =  new Vimeo(
-  process.env.REACT_APP_VIMEO_CLIENT_ID,
-  process.env.REACT_APP_VIMEO_CLIENT_SECRET,
-  process.env.REACT_APP_VIMEO_ACCESS_TOKEN
-);
-
 class App extends Component {
-
   constructor() {
     super();
     this.state = {
@@ -22,19 +14,11 @@ class App extends Component {
   }
 
   searchForTerm(term) {
-    vimeo.request({
-      path: `/videos?query=${term}`,
-      query: {
-        page: 1,
-        per_page: 10
-      }
-    }, (error, body, statusCode, headers) => {
-      if (error) {
-        console.log(error);
-      } else {
-        this.setState({videos: body.data});
-      }
-    });
+    const accessToken = process.env.REACT_APP_VIMEO_ACCESS_TOKEN;
+
+    fetch(`/videos?access_token=${accessToken}&page=1&per_page=10&query=${term}`)
+      .then((resp) => resp.json())
+      .then((json) => this.setState({ videos: json.data }));
   }
   render() {
     const debounceSearchVideos = _.debounce((term) => this.searchForTerm(term), 300);
