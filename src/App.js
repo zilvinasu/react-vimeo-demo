@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import _ from 'lodash';
 import { Vimeo } from 'vimeo';
 import SearchBar from './SearchBar';
 import 'antd/dist/antd.css'
@@ -10,26 +11,13 @@ const vimeo =  new Vimeo(
   process.env.REACT_APP_VIMEO_ACCESS_TOKEN
 );
 
-
 class App extends Component {
 
   constructor() {
     super();
-
-    /*
-    vimeo.request({
-      path: '/channels/staffpicks/videos',
-      query: {
-        page: 1
-      }
-    }, (error, body, statusCode, headers) => {
-      if (error) {
-        console.log(error);
-      } else {
-        console.log(body);
-      }
-    });
-    */
+    this.state = {
+      videos: []
+    }
   }
 
   searchForTerm(term) {
@@ -39,14 +27,16 @@ class App extends Component {
       if (error) {
         console.log(error);
       } else {
-        console.log(body);
+        this.setState({videos: body.data});
       }
     });
   }
 
   render() {
+    const debounceSearchVideos = _.debounce((term) => this.searchForTerm(term), 300);
+
     return (
-      <SearchBar onSearchTermChange={this.searchForTerm} />
+      <SearchBar onSearchTermChange={debounceSearchVideos} />
     );
   }
 }
