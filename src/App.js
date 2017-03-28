@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import _ from 'lodash';
 import { Vimeo } from 'vimeo';
 import SearchBar from './SearchBar';
+import VideoList from './VideoList';
 import 'antd/dist/antd.css'
 import './App.css';
 
@@ -22,7 +23,11 @@ class App extends Component {
 
   searchForTerm(term) {
     vimeo.request({
-      path: `/videos?query=${term}`
+      path: `/videos?query=${term}`,
+      query: {
+        page: 1,
+        per_page: 10
+      }
     }, (error, body, statusCode, headers) => {
       if (error) {
         console.log(error);
@@ -31,12 +36,18 @@ class App extends Component {
       }
     });
   }
-
   render() {
     const debounceSearchVideos = _.debounce((term) => this.searchForTerm(term), 300);
-
     return (
-      <SearchBar onSearchTermChange={debounceSearchVideos} />
+      <div>
+        <SearchBar onSearchTermChange={debounceSearchVideos} />
+        <VideoList
+          videos={this.state.videos}
+          onVideoSelect={selectedVideo => this.setState({ selectedVideo })} />
+        <div
+          style={{ width: '200px' }}
+          dangerouslySetInnerHTML={{ __html: this.state.selectedVideo ? this.state.selectedVideo.embed.html : null }} />;
+      </div>
     );
   }
 }
