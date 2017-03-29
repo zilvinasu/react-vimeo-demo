@@ -8,6 +8,7 @@ class VideoList extends Component {
           {this.props.videos.map((video) => {
             return (
               <div
+                key={video.resource_key}
                 onClick={() => this.props.onVideoSelect(video)}
                 className="ant-card ant-card-bordered">
                 <div className="ant-card-head">
