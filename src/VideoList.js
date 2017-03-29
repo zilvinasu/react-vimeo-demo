@@ -6,9 +6,10 @@ class VideoList extends Component {
     return (
       <div className="ant-row-flex">
         {this.props.videos.map(video =>
-          <div className="ant-col-6">
+          <div
+            className="ant-col-6"
+            key={video.resource_key}>
             <VideoItem
-              key={video.resource_key}
               video={video}
               onVideoSelect={this.props.onVideoSelect} />
           </div>
