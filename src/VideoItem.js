@@ -10,7 +10,7 @@ class VideoItem extends Component {
         className="ant-card ant-card-bordered" style={{ marginBottom: 4 }}>
         <div className="ant-card-body" style={{ padding: 0 }}>
           <img alt={name} src={_.last(pictures.sizes).link} width="100%" />
-          <p style={{padding: 10}}>{name}</p>
+          <p style={{ padding: 10 }}>{name}</p>
         </div>
       </div>
     );

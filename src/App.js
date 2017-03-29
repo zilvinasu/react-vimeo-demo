@@ -34,7 +34,7 @@ class App extends Component {
     return (
       <div>
         <div className="ant-row">
-          <div className="ant-col-12 ant-col-offset-6">
+          <div className="ant-col-12 ant-col-offset-2">
             <SearchBar onSearchTermChange={debounceSearchVideos} />
           </div>
         </div>
@@ -42,7 +42,10 @@ class App extends Component {
           <div className="ant-col-12 ant-col-offset-2">
             {this.state.selectedVideo ? <VideoDetail selectedVideo={this.state.selectedVideo} /> : null }
           </div>
-          <div className="ant-col-6">
+        </div>
+        <br />
+        <div className="ant-row">
+          <div className="ant-col-12 ant-col-offset-2">
             <VideoList
               videos={this.state.videos}
               onVideoSelect={selectedVideo => this.setState({ selectedVideo })} />

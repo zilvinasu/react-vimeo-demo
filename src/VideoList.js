@@ -4,12 +4,14 @@ import VideoItem from './VideoItem';
 class VideoList extends Component {
   render() {
     return (
-      <div>
+      <div className="ant-row-flex">
         {this.props.videos.map(video =>
-          <VideoItem
-            key={video.resource_key}
-            video={video}
-            onVideoSelect={this.props.onVideoSelect} />
+          <div className="ant-col-6">
+            <VideoItem
+              key={video.resource_key}
+              video={video}
+              onVideoSelect={this.props.onVideoSelect} />
+          </div>
         )}
       </div>
     )
