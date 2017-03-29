@@ -4,13 +4,13 @@ import { queryString } from './Utils';
 import SearchBar from './SearchBar';
 import VideoList from './VideoList';
 import 'antd/dist/antd.css'
-import './App.css';
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
-      videos: []
+      videos: [],
+      selectedVideo: null
     }
   }
 
