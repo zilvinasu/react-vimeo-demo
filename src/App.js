@@ -3,6 +3,7 @@ import _ from 'lodash';
 import { queryString } from './Utils';
 import SearchBar from './SearchBar';
 import VideoList from './VideoList';
+import VideoDetail from './VideoDetail';
 import 'antd/dist/antd.css'
 
 class App extends Component {
@@ -34,9 +35,7 @@ class App extends Component {
         <VideoList
           videos={this.state.videos}
           onVideoSelect={selectedVideo => this.setState({ selectedVideo })} />
-        <div
-          style={{ width: '200px' }}
-          dangerouslySetInnerHTML={{ __html: this.state.selectedVideo ? this.state.selectedVideo.embed.html : null }} />;
+        {this.state.selectedVideo ? <VideoDetail selectedVideo={this.state.selectedVideo} /> : null }
       </div>
     );
   }
