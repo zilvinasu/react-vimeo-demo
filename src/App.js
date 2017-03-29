@@ -13,6 +13,8 @@ class App extends Component {
       videos: [],
       selectedVideo: null
     }
+
+    this.searchForTerm('skiing');
   }
 
   searchForTerm(term) {
@@ -25,17 +27,27 @@ class App extends Component {
 
     fetch(`/videos?${q}`)
       .then((resp) => resp.json())
-      .then((json) => this.setState({ videos: json.data }));
+      .then((json) => this.setState({ videos: json.data, selectedVideo: json.data[0] }));
   }
   render() {
     const debounceSearchVideos = _.debounce((term) => this.searchForTerm(term), 300);
     return (
       <div>
-        <SearchBar onSearchTermChange={debounceSearchVideos} />
-        <VideoList
-          videos={this.state.videos}
-          onVideoSelect={selectedVideo => this.setState({ selectedVideo })} />
-        {this.state.selectedVideo ? <VideoDetail selectedVideo={this.state.selectedVideo} /> : null }
+        <div className="ant-row">
+          <div className="ant-col-12 ant-col-offset-6">
+            <SearchBar onSearchTermChange={debounceSearchVideos} />
+          </div>
+        </div>
+        <div className="ant-row">
+          <div className="ant-col-12 ant-col-offset-2">
+            {this.state.selectedVideo ? <VideoDetail selectedVideo={this.state.selectedVideo} /> : null }
+          </div>
+          <div className="ant-col-6">
+            <VideoList
+              videos={this.state.videos}
+              onVideoSelect={selectedVideo => this.setState({ selectedVideo })} />
+          </div>
+        </div>
       </div>
     );
   }

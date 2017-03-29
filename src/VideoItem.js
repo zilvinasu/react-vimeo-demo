@@ -3,18 +3,14 @@ import _ from 'lodash';
 
 class VideoItem extends Component {
   render() {
-    const { resource_key: resourceKey, name, pictures, description } = this.props.video;
+    const { name, pictures } = this.props.video;
     return (
       <div
-        key={resourceKey}
         onClick={() => this.props.onVideoSelect(this.props.video)}
-        className="ant-card ant-card-bordered">
-        <div className="ant-card-head">
-          <h3 className="ant-card-head-title">{name}</h3>
-        </div>
-        <div className="ant-card-body">
-          <img alt={name} src={_.last(pictures.sizes).link_with_play_button} width="100%" />
-          {description}
+        className="ant-card ant-card-bordered" style={{ marginBottom: 4 }}>
+        <div className="ant-card-body" style={{ padding: 0 }}>
+          <img alt={name} src={_.last(pictures.sizes).link} width="100%" />
+          <p style={{padding: 10}}>{name}</p>
         </div>
       </div>
     );

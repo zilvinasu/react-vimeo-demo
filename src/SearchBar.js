@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './SearchBar.css';
 
 class SearchBar extends Component {
   constructor(props) {
@@ -8,15 +9,11 @@ class SearchBar extends Component {
 
   render() {
     return (
-      <div className="ant-row search-bar">
-        <div className="ant-col-6 ant-col-offset-9">
-          <input
-            className="ant-input ant-input-lg"
-            onChange={event => this.onInputChange(event.target.value)}
-            placeholder="Enter the video name"
-            value={this.state.term} />
-        </div>
-      </div>
+      <input
+        className="search-bar ant-input ant-input-lg"
+        onChange={event => this.onInputChange(event.target.value)}
+        placeholder="Enter the video name"
+        value={this.state.term} />
     )
   }
 
