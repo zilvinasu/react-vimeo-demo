@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
+import { queryString } from './Utils';
 import SearchBar from './SearchBar';
 import VideoList from './VideoList';
 import 'antd/dist/antd.css'
@@ -14,9 +15,14 @@ class App extends Component {
   }
 
   searchForTerm(term) {
-    const accessToken = process.env.REACT_APP_VIMEO_ACCESS_TOKEN;
+    const q = queryString({
+      access_token: process.env.REACT_APP_VIMEO_ACCESS_TOKEN,
+      page: 1,
+      per_page: 10,
+      query: term
+    });
 
-    fetch(`/videos?access_token=${accessToken}&page=1&per_page=10&query=${term}`)
+    fetch(`/videos?${q}`)
       .then((resp) => resp.json())
       .then((json) => this.setState({ videos: json.data }));
   }
@@ -35,5 +41,6 @@ class App extends Component {
     );
   }
 }
+
 
 export default App;
