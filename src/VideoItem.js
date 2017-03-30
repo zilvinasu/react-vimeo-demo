@@ -7,7 +7,7 @@ const VideoItem = (props) => {
 
     return (
       <div
-        onClick={() => this.props.onVideoSelect(this.props.video)}
+        onClick={() => props.onVideoSelect(props.video)}
         className="card ant-card ant-card-bordered">
         <div className="card-body ant-card-body">
           <img alt={name} src={_.last(pictures.sizes).link} width="100%" />
